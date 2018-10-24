@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Custom SelectBox</title>
+		<link rel="stylesheet" href="css/jquery.jscrollpane.css" />
+		<link rel="stylesheet" href="css/customSelectBox.css" />
+		<!-- example.css is throwaway code for demoing -->
+		<link rel="stylesheet" href="css/example.css" />
+		<link rel="stylesheet" href="./css/nav.css">
+	</head>
+	<body class="noJS" id="example-1">
+		<script>
+			var bodyTag = document.getElementsByTagName("body")[0];
+				bodyTag.className = bodyTag.className.replace("noJS", "hasJS");
+		</script>
+<header  class="nav-down">
+	<div class="menu-container">	
+		<div class="menu">			
+		<div class="logo left"><a href="./Main.cy"><img src="./img/logo.png"></a></div>
+			<ul class="right ">								
+				<li><a href="#s4" class="scroll da">Cyber Projekt </a></li>
+				<li><a href="#s3" class="scroll da">Payment Platform</a></li>
+				<li><a href="#s1" class="scroll da">r2x blockchain</a></li>
+				
+				<li><a href="./CyberWalletInfoAction.cy" >MyWallet</a></li>
+				<li>
+					<a href="#" ><span class="bt1 bg_b t_w">
+						<i class="fas fa-sign-in-alt"></i>
+						&nbsp;&nbsp;dd</span>
+					</a>
+					<ul>
+					<li><a href="./CyberMypageAction.cy">MyPage</a></li>
+					<li><a href="./CyberBoardListAction.cy">1:1 question board</a></li>
+					<li><a href="./logout.cy">Logout</a></li>
+					</ul>
+					</li>
+					<!-- <li><a href="#" class="scroll"><span class="bt1 bg_w t_b"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Logout</span></a></li> -->
+				
+				
+				<li><a href="./Login.cy" ><span class="bt1 bg_b t_w"><i class="fas fa-sign-in-alt"></i>&nbsp;&nbsp;Login</span></a></li>
+				<li><a href="./resistration.cy" ><span class="bt1 bg_w t_b"><i class="fas fa-user-plus"></i>&nbsp;&nbsp;Signup</span></a></li>
+				
+							
+			</ul>
+		</div>
+	</div>
+</header>
+		<h2>Icon support</h2>
+		
+		<select class="custom" name="countriesFlag">
+		  <option class="usi">USA</option>
+		  <option class="italy">Italy</option>
+		  <option class="france">France</option>
+		  <option class="germany">Germany</option>
+		</select><br>
+	
+
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+		<script src="js/jScrollPane.js"></script>
+		<script src="js/jquery.mousewheel.js"></script>
+		<script src="js/SelectBox.js"></script>
+		<script>	
+			$(function() {
+				
+				$("select.custom").each(function() {					
+					var sb = new SelectBox({
+						selectbox: $(this),
+						height: 150,
+						width: 200
+					});
+				});
+				
+			});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,45 @@
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script src="./js/jquery.tzSelect.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/jquery.tzSelect.css" />
+<script type="text/javascript">
+<!--
+$(document).ready(function(){
+	
+	$('select.makeMeFancy').tzSelect({
+		render : function(option){
+			return $('<li>',{
+				html:	'<img src="'+option.data('icon')+'" /><span>'+
+						option.data('html-text')+'</span>'
+			});
+		},
+		className : 'hasDetails'
+	});
+	
+	// Calling the default version of the dropdown
+	$('select.regularSelect').tzSelect();
+
+});
+//-->
+</script>
+
+			<select name="fancySelect" class="makeMeFancy">
+        
+        	<!-- Notice the HTML5 data attributes -->
+        
+	        <option value="0" selected="selected" data-skip="1">select</option>
+        	<option value="1" data-icon="img/products/iphone.png" data-html-text="아이폰 4">아이폰 4</option>
+        	<option value="2" data-icon="img/products/ipod.png" data-html-text="아이팟 ">아이팟</option>
+            <option value="3" data-icon="img/products/air.png" data-html-text="맥북 에어">맥북 에어</option>
+            <option value="4" data-icon="img/products/imac.png" data-html-text="아이맥스테이션">아이맥스테이션</option>
+        </select>
+
+	
+
+    
+    	<!-- We are going to use jQuery to hide the select element and replace it -->
+        
+
+
+
+
