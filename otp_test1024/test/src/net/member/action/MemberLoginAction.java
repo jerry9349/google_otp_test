@@ -60,7 +60,7 @@ public class MemberLoginAction implements Action{
 		
 		//로그인 성공
 		System.out.println("로그인 성공");
-		
+		session.setAttribute("id", id); //세션에 id등록
 		//인증 상태 : state 가 0이면 otp 비활성화, state가 1이면 otp 활성화 상태이다.
 		int certification_state = 0;
 		//해당 id가 otp가 설정되어 있는지 검색하기
@@ -83,7 +83,7 @@ public class MemberLoginAction implements Action{
 		}
 		
 		
-		session.setAttribute("id", id); //세션에 id등록
+		
 		forward.setRedirect(false);
 		forward.setPath("./otp_main.jsp");
 		

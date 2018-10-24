@@ -31,11 +31,14 @@ public class GoogleOTP {
 	//구글 otp 인증키 생성 함수
 	public HashMap<String, String> generate(String userName, String hostName) {
 		HashMap<String, String> map = new HashMap<String, String>();
+		//랜덤 바이트 배열 생성
 		byte[] buffer = new byte[5 + 5 * 5];
+		//바이트 배열을 랜덤하게 채운다.
 		new Random().nextBytes(buffer);
-		Base32 codec = new Base32();
+		Base32 codec = new Base32();//Base32로 인코딩//db에 ASCII Code로 올바르게 인코딩하여 넣기 위해 사용
+		//첫 매개변수로 원본 배열 전달,둘째 매개변수로 새로운 배열로 복사할 요소의 개수 전달//복사된 새로운 byte배열 반환 받음
 		byte[] secretKey = Arrays.copyOf(buffer, 10);
-		byte[] bEncodedKey = codec.encode(secretKey);
+		byte[] bEncodedKey = codec.encode(secretKey);//반환받은 byte 배열을 Base32로 인코딩한다.
 
 		//생성된 key
 		String encodedKey = new String(bEncodedKey); 
@@ -46,7 +49,7 @@ public class GoogleOTP {
 		// key를 입력하거나 생성된 QR코드를 바코드 스캔하여 등록
 
 		System.out.println(url);
-		map.put("encodedKey", encodedKey);
+		map.put("encodedKey", encodedKey);//hashmap에 key와 url 저장
 		map.put("url", url);
 		return map;
 	}
@@ -58,7 +61,7 @@ public class GoogleOTP {
 		boolean result = false;
 		try {
 			Base32 codec = new Base32();
-			byte[] decodedKey = codec.decode(otpkey);
+			byte[] decodedKey = codec.decode(otpkey);//인코딩된 Byte 배열을 인코딩 해제
 			int window = 3;
 			//입력받은 otp number를 otpkey로 만들수 있는 난수 number들을 대입한다.
 			//true가 뜨면 otp 검사 완료, false가 뜨면 otp 검사 실패
@@ -75,7 +78,7 @@ public class GoogleOTP {
 		return result;
 	}
 	
-	//인증키 난수 생성 함수
+	//인증키 암호화, 복호화 함수//int 대신 long을 사용한다.
 	private static int verify_code(byte[] key, long t) throws NoSuchAlgorithmException, InvalidKeyException {
 		byte[] data = new byte[8];
 		long value = t;
@@ -83,6 +86,7 @@ public class GoogleOTP {
 			data[i] = (byte) value;
 		}
 
+		//받은 키를 HmacSHA1로 암호화,복호화 한다.
 		SecretKeySpec signKey = new SecretKeySpec(key, "HmacSHA1");
 		Mac mac = Mac.getInstance("HmacSHA1");
 		mac.init(signKey);
@@ -91,6 +95,7 @@ public class GoogleOTP {
 		int offset = hash[20 - 1] & 0xF;
 
 		// We're using a long because Java hasn't got unsigned int.
+		//java 에서 암호화할때 int 대신 long을 사용
 		long truncatedHash = 0;
 		for (int i = 0; i < 4; ++i) {
 			truncatedHash <<= 8;
